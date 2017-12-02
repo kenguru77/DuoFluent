@@ -1,6 +1,6 @@
 // ==UserScript==
-// @name DuoKbAuto
-// @description Keyboard autoswitcher
+// @name DuoFluent
+// @description Duolingo keyboard switcher
 // @author Ken Guru
 // @license MIT
 // @version 1.0
