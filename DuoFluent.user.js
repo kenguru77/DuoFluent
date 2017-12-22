@@ -3,7 +3,7 @@
 // @description Duolingo keyboard switcher
 // @author Ken Guru
 // @license MIT
-// @version 1.1
+// @version 1.0
 // @include https://www.duolingo.com/*
 // ==/UserScript==
 
@@ -31,7 +31,7 @@ if (w.self != w.top){
   return;
 }
 
-var ruArray={};
+var ruArray=[];
 
 ruArray['!']='!';  ruArray['@']='"';  ruArray['#']='№';  ruArray['$']=';';
 ruArray['%']='%';  ruArray['^']=':';  ruArray['&']='?';  ruArray['*']='*';
@@ -41,58 +41,27 @@ ruArray['1']='1';  ruArray['2']='2';  ruArray['3']='3';  ruArray['4']='4';
 ruArray['5']='5';  ruArray['6']='6';  ruArray['7']='7';  ruArray['8']='8';
 ruArray['9']='9';  ruArray['0']='0';  ruArray['-']='-';  ruArray['=']='=';
 
-ruArray['Q']='Й';  ruArray['W']='Ц';  ruArray['E']='У';  ruArray['R']='К';
-ruArray['T']='Е';  ruArray['Y']='Н';  ruArray['U']='Г';  ruArray['I']='Ш';
-ruArray['O']='Щ';  ruArray['P']='З';  ruArray['{']='Х';  ruArray['}']='Ъ';
-ruArray['A']='Ф';  ruArray['S']='Ы';  ruArray['D']='В';  ruArray['F']='А';
-ruArray['G']='П';  ruArray['H']='Р';  ruArray['J']='О';  ruArray['K']='Л';
-ruArray['L']='Д';  ruArray[':']='Ж';  ruArray['"']='Э';  ruArray['Z']='Я';
-ruArray['X']='Ч';  ruArray['C']='С';  ruArray['V']='М';  ruArray['B']='И';
-ruArray['N']='Т';  ruArray['M']='Ь';  ruArray['<']='Б';  ruArray['>']='Ю';
+ruArray['Q']='Й';  ruArray['W']='Ц';  ruArray['E']='У';  ruArray['R']='К';  ruArray['T']='Е';  ruArray['Y']='Н';  ruArray['U']='Г';  ruArray['I']='Ш';  ruArray['O']='Щ';  ruArray['P']='З';  ruArray['{']='Х';  ruArray['}']='Ъ';  ruArray['A']='Ф';  ruArray['S']='Ы';  ruArray['D']='В';  ruArray['F']='А';  ruArray['G']='П';  ruArray['H']='Р';  ruArray['J']='О';  ruArray['K']='Л';  ruArray['L']='Д';  ruArray[':']='Ж';  ruArray['"']='Э';  ruArray['Z']='Я';  ruArray['X']='Ч';  ruArray['C']='С';  ruArray['V']='М';  ruArray['B']='И';  ruArray['N']='Т';  ruArray['M']='Ь';  ruArray['<']='Б';  ruArray['>']='Ю';
 
-ruArray['q']='й';  ruArray['w']='ц';  ruArray['e']='у';  ruArray['r']='к';
-ruArray['t']='е';  ruArray['y']='н';  ruArray['u']='г';  ruArray['i']='ш';
-ruArray['o']='щ';  ruArray['p']='з';  ruArray['[']='х';  ruArray[']']='ъ';
-ruArray['a']='ф';  ruArray['s']='ы';  ruArray['d']='в';  ruArray['f']='а';
-ruArray['g']='п';  ruArray['h']='р';  ruArray['j']='о';  ruArray['k']='л';
-ruArray['l']='д';  ruArray[';']='ж';  ruArray["'"]='э';  ruArray['z']='я';
-ruArray['x']='ч';  ruArray['c']='с';  ruArray['v']='м';  ruArray['b']='и';
-ruArray['n']='т';  ruArray['m']='ь';  ruArray[',']='б';  ruArray['.']='ю';
-ruArray['/']='.';  ruArray['?']=',';  ruArray[' ']=' ';
+ruArray['q']='й';  ruArray['w']='ц';  ruArray['e']='у';  ruArray['r']='к';  ruArray['t']='е';  ruArray['y']='н';  ruArray['u']='г';  ruArray['i']='ш';  ruArray['o']='щ';  ruArray['p']='з';  ruArray['[']='х';  ruArray[']']='ъ';  ruArray['a']='ф';  ruArray['s']='ы';  ruArray['d']='в';  ruArray['f']='а';  ruArray['g']='п';  ruArray['h']='р';  ruArray['j']='о';  ruArray['k']='л';  ruArray['l']='д';  ruArray[';']='ж';  ruArray["'"]='э';  ruArray['z']='я';  ruArray['x']='ч';  ruArray['c']='с';  ruArray['v']='м';  ruArray['b']='и';  ruArray['n']='т';  ruArray['m']='ь';  ruArray[',']='б';  ruArray['.']='ю';  ruArray['/']='.';  ruArray['?']=',';  ruArray[' ']=' ';
+
 ruArray['~']='Ё';  ruArray['`']='ё';  ruArray['\\']='\\';  ruArray['|']='/';
 
-function keyToRu(key) {
-  return ruArray[key];
+function keyToRu(enKey) {
+  return ruArray[enKey];
 }
-
-var enArray={};
-
-for (var i in ruArray) {
-  enArray[ruArray[i]] = i;
-}
-
-function keyToEn(key) {
-  return enArray[key];
-}
-
-function getChar(event) {
-  if (event.target.lang == "ru") {
-    if(event.key > '~')  return event.key; // Russian layout
-    return keyToRu(event.key);
-  }    
-  if(event.key <= '~') return event.key; // English layout
-  return keyToEn(event.key);
-}
-
 
 var eventBlur = new Event("blur", {bubbles: true, cancelable: true});
 
-function  watchLang(e) {
-  if (e.ctrlKey || e.altKey || e.metaKey) return; // the modifier key is pressed
-  if (e.key.length > 1) return; //  special key - backspace etc.
+function watchLang(e) {
+  if (e.target.lang != "ru") return; 
+  if (e.ctrlKey || e.altKey || e.metaKey) return; // the modifier key is pressed 
+  var char = e.key;
+  if (char.length > 1) return; // special key - backspace etc.
+  if(char > '~')  return; // Russian layout
   var str = e.target.value;
   var pos = e.target.selectionStart;
-  str = str.slice(0,pos) + getChar(e) + str.slice(pos);
+  str = str.slice(0,pos) + keyToRu(char) + str.slice(pos);
   e.target.value = str;
   e.target.selectionStart = e.target.selectionEnd = ++pos;
   e.target.dispatchEvent(eventBlur);
