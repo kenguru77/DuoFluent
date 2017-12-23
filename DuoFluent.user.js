@@ -3,7 +3,7 @@
 // @description Duolingo keyboard switcher
 // @author Ken Guru
 // @license MIT
-// @version 1.0
+// @version 1.0.1
 // @include https://www.duolingo.com/*
 // ==/UserScript==
 
@@ -31,7 +31,7 @@ if (w.self != w.top){
   return;
 }
 
-var ruArray=[];
+var ruArray={};
 
 ruArray['!']='!';  ruArray['@']='"';  ruArray['#']='№';  ruArray['$']=';';
 ruArray['%']='%';  ruArray['^']=':';  ruArray['&']='?';  ruArray['*']='*';
@@ -41,10 +41,25 @@ ruArray['1']='1';  ruArray['2']='2';  ruArray['3']='3';  ruArray['4']='4';
 ruArray['5']='5';  ruArray['6']='6';  ruArray['7']='7';  ruArray['8']='8';
 ruArray['9']='9';  ruArray['0']='0';  ruArray['-']='-';  ruArray['=']='=';
 
-ruArray['Q']='Й';  ruArray['W']='Ц';  ruArray['E']='У';  ruArray['R']='К';  ruArray['T']='Е';  ruArray['Y']='Н';  ruArray['U']='Г';  ruArray['I']='Ш';  ruArray['O']='Щ';  ruArray['P']='З';  ruArray['{']='Х';  ruArray['}']='Ъ';  ruArray['A']='Ф';  ruArray['S']='Ы';  ruArray['D']='В';  ruArray['F']='А';  ruArray['G']='П';  ruArray['H']='Р';  ruArray['J']='О';  ruArray['K']='Л';  ruArray['L']='Д';  ruArray[':']='Ж';  ruArray['"']='Э';  ruArray['Z']='Я';  ruArray['X']='Ч';  ruArray['C']='С';  ruArray['V']='М';  ruArray['B']='И';  ruArray['N']='Т';  ruArray['M']='Ь';  ruArray['<']='Б';  ruArray['>']='Ю';
+ruArray['Q']='Й';  ruArray['W']='Ц';  ruArray['E']='У';  ruArray['R']='К';
+ruArray['T']='Е';  ruArray['Y']='Н';  ruArray['U']='Г';  ruArray['I']='Ш';
+ruArray['O']='Щ';  ruArray['P']='З';  ruArray['{']='Х';  ruArray['}']='Ъ';
+ruArray['A']='Ф';  ruArray['S']='Ы';  ruArray['D']='В';  ruArray['F']='А';
+ruArray['G']='П';  ruArray['H']='Р';  ruArray['J']='О';  ruArray['K']='Л';
+ruArray['L']='Д';  ruArray[':']='Ж';  ruArray['"']='Э';  ruArray['Z']='Я';
+ruArray['X']='Ч';  ruArray['C']='С';  ruArray['V']='М';  ruArray['B']='И';
+ruArray['N']='Т';  ruArray['M']='Ь';  ruArray['<']='Б';  ruArray['>']='Ю';
 
-ruArray['q']='й';  ruArray['w']='ц';  ruArray['e']='у';  ruArray['r']='к';  ruArray['t']='е';  ruArray['y']='н';  ruArray['u']='г';  ruArray['i']='ш';  ruArray['o']='щ';  ruArray['p']='з';  ruArray['[']='х';  ruArray[']']='ъ';  ruArray['a']='ф';  ruArray['s']='ы';  ruArray['d']='в';  ruArray['f']='а';  ruArray['g']='п';  ruArray['h']='р';  ruArray['j']='о';  ruArray['k']='л';  ruArray['l']='д';  ruArray[';']='ж';  ruArray["'"]='э';  ruArray['z']='я';  ruArray['x']='ч';  ruArray['c']='с';  ruArray['v']='м';  ruArray['b']='и';  ruArray['n']='т';  ruArray['m']='ь';  ruArray[',']='б';  ruArray['.']='ю';  ruArray['/']='.';  ruArray['?']=',';  ruArray[' ']=' ';
+ruArray['q']='й';  ruArray['w']='ц';  ruArray['e']='у';  ruArray['r']='к';
+ruArray['t']='е';  ruArray['y']='н';  ruArray['u']='г';  ruArray['i']='ш';
+ruArray['o']='щ';  ruArray['p']='з';  ruArray['[']='х';  ruArray[']']='ъ';
+ruArray['a']='ф';  ruArray['s']='ы';  ruArray['d']='в';  ruArray['f']='а';
+ruArray['g']='п';  ruArray['h']='р';  ruArray['j']='о';  ruArray['k']='л';
+ruArray['l']='д';  ruArray[';']='ж';  ruArray["'"]='э';  ruArray['z']='я';
+ruArray['x']='ч';  ruArray['c']='с';  ruArray['v']='м';  ruArray['b']='и';
+ruArray['n']='т';  ruArray['m']='ь';  ruArray[',']='б';  ruArray['.']='ю';
 
+ruArray['/']='.';  ruArray['?']=',';  ruArray[' ']=' ';
 ruArray['~']='Ё';  ruArray['`']='ё';  ruArray['\\']='\\';  ruArray['|']='/';
 
 function keyToRu(enKey) {
