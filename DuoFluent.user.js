@@ -3,7 +3,7 @@
 // @description Duolingo keyboard switcher
 // @author Ken Guru
 // @license MIT
-// @version 1.0.1
+// @version 1.0.2
 // @include https://www.duolingo.com/*
 // ==/UserScript==
 
@@ -66,8 +66,6 @@ function keyToRu(enKey) {
   return ruArray[enKey];
 }
 
-var eventBlur = new Event("blur", {bubbles: true, cancelable: true});
-
 function watchLang(e) {
   if (e.target.lang != "ru") return; 
   if (e.ctrlKey || e.altKey || e.metaKey) return; // the modifier key is pressed 
@@ -76,18 +74,15 @@ function watchLang(e) {
   if(char > '~')  return; // Russian layout
   var str = e.target.value;
   var pos = e.target.selectionStart;
-  str = str.slice(0,pos) + keyToRu(char) + str.slice(pos);
+  str = str.slice(0,pos - 1) + keyToRu(char) + str.slice(pos);
   e.target.value = str;
   e.target.selectionStart = e.target.selectionEnd = ++pos;
-  e.target.dispatchEvent(eventBlur);
-  return false;
 }
-
 
 // additional url check.
 // Google Chrome do not treat @match as intended sometimes.
 if (/https:\/\/www.duolingo.com/.test(w.location.href)){
 // Run it
-  document.body.onkeypress =  watchLang;
+  document.body.onkeyup =  watchLang;
 }
 })(window);
