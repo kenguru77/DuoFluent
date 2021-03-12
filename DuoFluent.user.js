@@ -76,7 +76,7 @@ function watchLang(e) {
   var pos = e.target.selectionStart;
   str = str.slice(0,pos - 1) + keyToRu(char) + str.slice(pos);
   e.target.value = str;
-  e.target.selectionStart = e.target.selectionEnd = ++pos;
+  e.target.selectionStart = e.target.selectionEnd = pos;
 }
 
 // additional url check.
